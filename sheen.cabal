@@ -1,0 +1,15 @@
+build-type:       Simple
+name:             sheen
+version:          0.1
+license-file:     LICENSE
+executable:       sheen
+main-is:          Main.hs
+hs-source-dirs:   src
+includes:         sheen.h
+install-includes: sheen.h
+include-dirs:     include
+build-depends:    base, containers, unix, Util, process
+extensions:       ForeignFunctionInterface, CPP
+c-sources:        cbits/sheen.c
+other-modules:    System.Process.Pty
+ghc-options:      -threaded -Wall
