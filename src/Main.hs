@@ -10,7 +10,6 @@ import System.Posix.Terminal
 import System.Posix.Types
 import System.Posix.IO
 import System.Process
-import Util
 
 -- state for a single process
 data Window = Window {
@@ -39,6 +38,9 @@ data Session = Session {
   snEsc      :: Char,
   -- char following escape key that produces literal snEsc
   snEsc2     :: Char}
+
+dlof :: a -> [a -> a] -> a
+dlof = foldl (flip ($))
 
 -- check if a key sequence is a legit command
 -- if it is do the command and return Nothing
