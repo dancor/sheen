@@ -5,14 +5,14 @@ import Foreign.C
 import System.IO
 import System.Posix.Types
 import System.Posix.IO
-import System.Process.Internals
+import System.Process.Internals hiding (fdToHandle)
 
 #include "sheen.h"
 
 foreign import ccall "static sheen.h run_pty_process"
     c_run_pty_process :: Ptr CString -> Ptr CInt -> IO PHANDLE
 
-runPtyProcess :: [String] -> IO (Handle,ProcessHandle)
+runPtyProcess :: [String] -> IO (Handle, ProcessHandle)
 runPtyProcess args =
   alloca $ \ fdMasterPtr ->
   withMany withCString args $ \ cstrs ->
@@ -24,4 +24,4 @@ runPtyProcess args =
     hMaster <- fdToHandle (Fd fdMaster)
     procHandle <- mkProcessHandle procHandleInt
     hSetBuffering hMaster NoBuffering
-    return (hMaster,procHandle)
+    return (hMaster, procHandle)

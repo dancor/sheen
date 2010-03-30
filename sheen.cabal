@@ -8,7 +8,7 @@ hs-source-dirs:   src
 includes:         sheen.h
 install-includes: sheen.h
 include-dirs:     include
-build-depends:    base, containers, unix, Util, process
+build-depends:    base, containers, unix, FUtil, process
 extensions:       ForeignFunctionInterface, CPP
 c-sources:        cbits/sheen.c
 other-modules:    System.Process.Pty

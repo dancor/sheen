@@ -55,6 +55,10 @@ tryCmd sn s = let curWinIx = snCurWinIx sn in case s of
     -- FIXME: display "This IS window 1" if already is?
     swapMVar curWinIx 1
     return (sn, Nothing)
+  "0" -> do
+    -- FIXME: display "This IS window 1" if already is?
+    swapMVar curWinIx 0
+    return (sn, Nothing)
   _ -> return (sn, Nothing)
 
 -- filter input and forward input to the current window
@@ -143,7 +147,7 @@ hWaitForEnd h = hideErrs $ do
 
 makeWin :: [String] -> IO Window
 makeWin shellCmd = do
-  (h,pid) <- runPtyProcess shellCmd
+  (h, pid) <- runPtyProcess shellCmd
   return $ Window {
     wH       = h,
     wPid     = pid,
